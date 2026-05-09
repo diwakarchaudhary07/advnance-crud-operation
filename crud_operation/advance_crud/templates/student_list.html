@@ -100,6 +100,8 @@
             <th>Name</th>
             <th>Email</th>
             <th>Age</th>
+            <th>City</th>
+            <th>Contact No </th>
             <th>Action</th>
         </tr>
 
@@ -108,6 +110,8 @@
             <td>{{ student.name }}</td>
             <td>{{ student.email }}</td>
             <td>{{ student.age }}</td>
+            <td>{{ student.city }}</td>
+            <td>{{ student.contact}}</td>
             <td>
                 <a href="{% url 'student_update' student.id %}" class="edit-btn">Edit</a>
                 <a href="{% url 'student_delete' student.id %}" class="delete-btn">Delete</a>
