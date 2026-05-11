@@ -23,7 +23,6 @@ def student_list(request):
     students = Student.objects.all().order_by('-id')
 
     # Search Logic
-
     if search:
 
         students = students.filter(
@@ -36,7 +35,6 @@ def student_list(request):
         )
 
     # City Filter
-
     if city_filter:
 
         students = students.filter(
@@ -44,7 +42,6 @@ def student_list(request):
         )
 
     # Date Filter
-
     if from_date and to_date:
 
         students = students.filter(
@@ -52,7 +49,6 @@ def student_list(request):
         )
 
     # Pagination
-
     paginator = Paginator(students, 5)
 
     page_number = request.GET.get('page')
