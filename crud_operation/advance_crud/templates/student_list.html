@@ -38,8 +38,6 @@
             color: #333;
         }
 
-        /* Top Bar */
-
         .top-bar{
             display: flex;
             justify-content: space-between;
@@ -49,8 +47,6 @@
             margin-bottom: 25px;
         }
 
-        /* Add Button */
-
         .add-btn{
             background: #4CAF50;
             color: white;
@@ -58,20 +54,17 @@
             padding: 10px 18px;
             border-radius: 5px;
             font-weight: bold;
-            transition: 0.3s;
         }
 
         .add-btn:hover{
             background: #45a049;
         }
 
-        /* Search Form */
-
         .search-box{
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            align-items: end;
+            align-items: center;
         }
 
         .search-box input,
@@ -80,28 +73,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
-            font-size: 14px;
         }
-
-        .search-box input[type="text"]{
-            width: 250px;
-        }
-
-        /* Date Box */
-
-        .date-box{
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .date-box label{
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* Buttons */
 
         .search-btn{
             padding: 10px 15px;
@@ -130,8 +102,6 @@
             background: #e68900;
         }
 
-        /* Table */
-
         table{
             width: 100%;
             border-collapse: collapse;
@@ -159,8 +129,6 @@
             background: #ddd;
         }
 
-        /* Edit Button */
-
         .edit-btn{
             background: #2196F3;
             color: white;
@@ -174,8 +142,6 @@
             background: #0b7dda;
         }
 
-        /* Delete Button */
-
         .delete-btn{
             background: #f44336;
             color: white;
@@ -188,15 +154,11 @@
             background: #da190b;
         }
 
-        /* No Data */
-
         .no-data{
             color: red;
             font-weight: bold;
             padding: 20px;
         }
-
-        /* Pagination */
 
         .pagination{
             margin-top: 25px;
@@ -220,11 +182,6 @@
             background: #0b7dda;
         }
 
-        .current-page{
-            font-weight: bold;
-            color: #333;
-        }
-
     </style>
 
 </head>
@@ -235,21 +192,13 @@
 
     <h2>Student List</h2>
 
-    <!-- Top Bar -->
-
     <div class="top-bar">
-
-        <!-- Add Student -->
 
         <a href="{% url 'student_create' %}" class="add-btn">
             + Add Student
         </a>
 
-        <!-- Search Form -->
-
         <form method="GET" class="search-box">
-
-            <!-- Search Input -->
 
             <input 
                 type="text"
@@ -257,8 +206,6 @@
                 placeholder="Search by name, age, email, city"
                 value="{{ request.GET.search }}"
             >
-
-            <!-- City Filter -->
 
             <select name="city">
 
@@ -270,49 +217,23 @@
                 <option value="Lucknow">Lucknow</option>
                 <option value="Patna">Patna</option>
 
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-
             </select>
 
-            <!-- From Date -->
+            <input 
+                type="date"
+                name="from_date"
+                placeholder="From Date"
+            >
 
-            <div class="date-box">
-
-                <label>From Date</label>
-
-                <input 
-                    type="date"
-                    name="from_date"
-                    value="{{ request.GET.from_date }}"
-                >
-
-            </div>
-
-            <!-- To Date -->
-
-            <div class="date-box">
-
-                <label>To Date</label>
-
-                <input 
-                    type="date"
-                    name="to_date"
-                    value="{{ request.GET.to_date }}"
-                >
-
-            </div>
-
-            <!-- Search Button -->
+            <input 
+                type="date"
+                name="to_date"
+                placeholder="Today"
+            >
 
             <button type="submit" class="search-btn">
                 Search
             </button>
-
-            <!-- Refresh Button -->
 
             <a href="{% url 'student_list' %}" class="refresh-btn">
                 Refresh
@@ -322,8 +243,6 @@
 
     </div>
 
-    <!-- Student Table -->
-
     <table>
 
         <tr>
@@ -331,7 +250,8 @@
             <th>Email</th>
             <th>Age</th>
             <th>City</th>
-            <th>Contact</th>
+            <th>Contact No</th>
+            <th>Created At</th>
             <th>Action</th>
         </tr>
 
@@ -343,7 +263,8 @@
             <td>{{ student.email }}</td>
             <td>{{ student.age }}</td>
             <td>{{ student.city }}</td>
-            <td>{{ student.contact }}</td>
+            <td>{{ student.contact_no }}</td>
+            <td>{{ student.created_at }}</td>
 
             <td>
 
@@ -363,7 +284,7 @@
 
         <tr>
 
-            <td colspan="6" class="no-data">
+            <td colspan="7" class="no-data">
                 No Student Found
             </td>
 
@@ -372,8 +293,6 @@
         {% endfor %}
 
     </table>
-
-    <!-- Pagination -->
 
     <div class="pagination">
 
@@ -389,7 +308,7 @@
 
         {% endif %}
 
-        <span class="current-page">
+        <span>
             Page {{ students.number }} of {{ students.paginator.num_pages }}
         </span>
 
